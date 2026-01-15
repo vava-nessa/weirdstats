@@ -107,7 +107,13 @@ export function ExpandableStatRow({
       {/* Expandable Detail Panel */}
       <AnimatePresence>
         {isExpanded && metadata && (
-          <StatDetailPanel metadata={metadata} bgColor={bgColor} textColor={textColor} />
+          <StatDetailPanel
+            metadata={metadata}
+            bgColor={bgColor}
+            textColor={textColor}
+            statKey={statKey}
+            currentValue={values.session}
+          />
         )}
       </AnimatePresence>
     </>

@@ -1,21 +1,48 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { ExternalLink } from 'lucide-react'
 import { StatMetadata, formatRateInterval } from '@/lib/statMetadata'
+import { OlympicPool } from './OlympicPool'
 
 interface StatDetailPanelProps {
   metadata: StatMetadata
   bgColor: string
   textColor: string
+  statKey: string
+  currentValue: number
 }
 
-export function StatDetailPanel({ metadata, bgColor, textColor }: StatDetailPanelProps) {
+export function StatDetailPanel({ metadata, bgColor, textColor, statKey, currentValue }: StatDetailPanelProps) {
   const t = useTranslations('statDetails')
   const { primary, primaryUnit, secondary, interval } = formatRateInterval(metadata.ratePerSecond)
   const [showTooltip, setShowTooltip] = useState(false)
+
+  // Check if this is a pool stat
+  const isPoolStat = statKey === 'pools.poopPools' || statKey === 'pools.peePools'
+  const poolColor = statKey === 'pools.poopPools' ? 'brown' : 'yellow'
+
+  // Calculate pools: full pools + current filling pool
+  const poolsData = useMemo(() => {
+    if (!isPoolStat) return null
+
+    const fullPools = Math.floor(currentValue)
+    const currentPoolPercentage = (currentValue - fullPools) * 100
+
+    const pools = []
+    // Add full pools
+    for (let i = 0; i < fullPools; i++) {
+      pools.push({ index: i, fillPercentage: 100 })
+    }
+    // Add currently filling pool
+    if (currentPoolPercentage > 0 || fullPools === 0) {
+      pools.push({ index: fullPools, fillPercentage: currentPoolPercentage })
+    }
+
+    return pools
+  }, [isPoolStat, currentValue])
 
   return (
     <motion.tr
@@ -37,9 +64,20 @@ export function StatDetailPanel({ metadata, bgColor, textColor }: StatDetailPane
             {metadata.explanation}
           </div>
 
-          {/* Large empty space for future animations */}
+          {/* Large space for animations */}
           <div className="min-h-[80px] mb-3">
-            {/* Space reserved for future animations */}
+            {isPoolStat && poolsData && poolsData.length > 0 && (
+              <div className="flex flex-wrap gap-3 items-end justify-start py-2">
+                {poolsData.map((pool) => (
+                  <OlympicPool
+                    key={pool.index}
+                    fillPercentage={pool.fillPercentage}
+                    color={poolColor as 'brown' | 'yellow'}
+                    index={pool.index}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Bottom-right info box */}
