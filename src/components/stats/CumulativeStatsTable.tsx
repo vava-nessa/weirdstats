@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useCallback } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 
 import { MultiPeriodStats } from '@/types/stats'
@@ -11,8 +12,9 @@ import {
   TableRow,
   TableHead,
 } from '@/components/ui/Table'
-import { StatRow } from './StatRow'
+import { ExpandableStatRow } from './ExpandableStatRow'
 import { formatTime } from '@/lib/formatters'
+import { STAT_METADATA } from '@/lib/statMetadata'
 
 interface CumulativeStatsTableProps {
   stats: MultiPeriodStats
@@ -24,6 +26,21 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
   const locale = useLocale()
   const currentMonth = new Date().toLocaleString(locale, { month: 'long' })
   const capitalizedMonth = currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1)
+
+  // Track which rows are expanded
+  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
+
+  const toggleRow = useCallback((statKey: string) => {
+    setExpandedRows((prev) => {
+      const next = new Set(prev)
+      if (next.has(statKey)) {
+        next.delete(statKey)
+      } else {
+        next.add(statKey)
+      }
+      return next
+    })
+  }, [])
 
   return (
     <Card className="overflow-hidden">
@@ -54,154 +71,238 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
         </TableHeader>
         <TableBody>
           {/* Deaths Section */}
-          <StatRow
+          <ExpandableStatRow
+            statKey="deaths.total"
             label={t('labels.deathsTotal')}
             values={stats.deaths.total}
+            metadata={STAT_METADATA['deaths.total']}
             bgColor="bg-red-100"
             textColor="text-red-800"
             isTotal={true}
+            isExpanded={expandedRows.has('deaths.total')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="deaths.murder"
             label={t('labels.deathsMurder')}
             values={stats.deaths.murder}
+            metadata={STAT_METADATA['deaths.murder']}
             bgColor="bg-red-50"
             textColor="text-red-600"
             indent
+            isExpanded={expandedRows.has('deaths.murder')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="deaths.suicide"
             label={t('labels.deathsSuicide')}
             values={stats.deaths.suicide}
+            metadata={STAT_METADATA['deaths.suicide']}
             bgColor="bg-red-50"
             textColor="text-red-600"
             indent
+            isExpanded={expandedRows.has('deaths.suicide')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="deaths.tobacco"
             label={t('labels.deathsTobacco')}
             values={stats.deaths.tobacco}
+            metadata={STAT_METADATA['deaths.tobacco']}
             bgColor="bg-red-50"
             textColor="text-red-600"
             indent
+            isExpanded={expandedRows.has('deaths.tobacco')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="deaths.hunger"
             label={t('labels.deathsHunger')}
             values={stats.deaths.hunger}
+            metadata={STAT_METADATA['deaths.hunger']}
             bgColor="bg-red-50"
             textColor="text-red-600"
             indent
+            isExpanded={expandedRows.has('deaths.hunger')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="deaths.road"
             label={t('labels.deathsRoad')}
             values={stats.deaths.road}
+            metadata={STAT_METADATA['deaths.road']}
             bgColor="bg-red-50"
             textColor="text-red-600"
             indent
+            isExpanded={expandedRows.has('deaths.road')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="deaths.other"
             label={t('labels.deathsOther')}
             values={stats.deaths.other}
+            metadata={STAT_METADATA['deaths.other']}
             bgColor="bg-red-50"
             textColor="text-red-600"
             indent
+            isExpanded={expandedRows.has('deaths.other')}
+            onToggle={toggleRow}
           />
 
           {/* Births Section */}
-          <StatRow
+          <ExpandableStatRow
+            statKey="births"
             label={t('labels.births')}
             values={stats.births}
+            metadata={STAT_METADATA['births']}
             bgColor="bg-green-50"
             textColor="text-green-700"
             isTotal={true}
+            isExpanded={expandedRows.has('births')}
+            onToggle={toggleRow}
           />
 
           {/* Net Growth Section */}
-          <StatRow
+          <ExpandableStatRow
+            statKey="netGrowth"
             label={t('labels.netGrowth')}
             values={stats.netGrowth}
+            metadata={STAT_METADATA['netGrowth']}
             bgColor="bg-blue-50"
             textColor="text-blue-600"
             isTotal={true}
+            isExpanded={expandedRows.has('netGrowth')}
+            onToggle={toggleRow}
           />
 
           {/* Injuries Section */}
-          <StatRow
+          <ExpandableStatRow
+            statKey="injuries.brokenLeg"
             label={t('labels.injuriesBrokenLeg')}
             values={stats.injuries.brokenLeg}
+            metadata={STAT_METADATA['injuries.brokenLeg']}
             bgColor="bg-orange-50"
             textColor="text-orange-700"
+            isExpanded={expandedRows.has('injuries.brokenLeg')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="injuries.brokenArm"
             label={t('labels.injuriesBrokenArm')}
             values={stats.injuries.brokenArm}
+            metadata={STAT_METADATA['injuries.brokenArm']}
             bgColor="bg-orange-50"
             textColor="text-orange-700"
+            isExpanded={expandedRows.has('injuries.brokenArm')}
+            onToggle={toggleRow}
           />
 
           {/* Social Section */}
-          <StatRow
+          <ExpandableStatRow
+            statKey="social.marriages"
             label={t('labels.socialMarriages')}
             values={stats.social.marriages}
+            metadata={STAT_METADATA['social.marriages']}
             bgColor="bg-amber-50"
             textColor="text-amber-700"
+            isExpanded={expandedRows.has('social.marriages')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="social.divorces"
             label={t('labels.socialDivorces')}
             values={stats.social.divorces}
+            metadata={STAT_METADATA['social.divorces']}
             bgColor="bg-amber-50"
             textColor="text-amber-700"
+            isExpanded={expandedRows.has('social.divorces')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="social.abandonments"
             label={t('labels.socialAbandonments')}
             values={stats.social.abandonments}
+            metadata={STAT_METADATA['social.abandonments']}
             bgColor="bg-amber-50"
             textColor="text-amber-700"
+            isExpanded={expandedRows.has('social.abandonments')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="social.adoptions"
             label={t('labels.socialAdoptions')}
             values={stats.social.adoptions}
+            metadata={STAT_METADATA['social.adoptions']}
             bgColor="bg-amber-50"
             textColor="text-amber-700"
+            isExpanded={expandedRows.has('social.adoptions')}
+            onToggle={toggleRow}
           />
 
           {/* Physiological Section */}
-          <StatRow
+          <ExpandableStatRow
+            statKey="physiological.poop"
             label={t('labels.physiologicalPoop')}
             values={stats.physiological.poop}
+            metadata={STAT_METADATA['physiological.poop']}
             bgColor="bg-purple-50"
             textColor="text-purple-700"
+            isExpanded={expandedRows.has('physiological.poop')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="physiological.pee"
             label={t('labels.physiologicalPee')}
             values={stats.physiological.pee}
+            metadata={STAT_METADATA['physiological.pee']}
             bgColor="bg-purple-50"
             textColor="text-purple-700"
+            isExpanded={expandedRows.has('physiological.pee')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="physiological.sneezes"
             label={t('labels.physiologicalSneezes')}
             values={stats.physiological.sneezes}
+            metadata={STAT_METADATA['physiological.sneezes']}
             bgColor="bg-purple-50"
             textColor="text-purple-700"
+            isExpanded={expandedRows.has('physiological.sneezes')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="physiological.waterConsumed"
             label={t('labels.physiologicalWaterConsumed')}
             values={stats.physiological.waterConsumed}
+            metadata={STAT_METADATA['physiological.waterConsumed']}
             bgColor="bg-purple-50"
             textColor="text-purple-700"
+            isExpanded={expandedRows.has('physiological.waterConsumed')}
+            onToggle={toggleRow}
           />
 
           {/* Pools Section */}
-          <StatRow
+          <ExpandableStatRow
+            statKey="pools.poopPools"
             label={t('labels.poolsPoop')}
             values={stats.pools.poopPools}
+            metadata={STAT_METADATA['pools.poopPools']}
             bgColor="bg-cyan-50"
             textColor="text-cyan-800"
             fractionDigits={1}
+            isExpanded={expandedRows.has('pools.poopPools')}
+            onToggle={toggleRow}
           />
-          <StatRow
+          <ExpandableStatRow
+            statKey="pools.peePools"
             label={t('labels.poolsPee')}
             values={stats.pools.peePools}
+            metadata={STAT_METADATA['pools.peePools']}
             bgColor="bg-cyan-50"
             textColor="text-cyan-800"
             fractionDigits={1}
+            isExpanded={expandedRows.has('pools.peePools')}
+            onToggle={toggleRow}
           />
         </TableBody>
       </Table>

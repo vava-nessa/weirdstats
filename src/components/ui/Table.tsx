@@ -32,10 +32,15 @@ export function TableBody({ children }: TableBodyProps) {
 interface TableRowProps {
   children: ReactNode
   className?: string
+  onClick?: () => void
 }
 
-export function TableRow({ children, className = '' }: TableRowProps) {
-  return <tr className={className}>{children}</tr>
+export function TableRow({ children, className = '', onClick }: TableRowProps) {
+  return (
+    <tr className={className} onClick={onClick}>
+      {children}
+    </tr>
+  )
 }
 
 interface TableHeadProps {

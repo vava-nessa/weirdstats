@@ -2,7 +2,13 @@
   "metadata": {
     "title": "WeirdStats - Real-Time World Statistics",
     "description": "Real-time dashboard for world statistics - births, deaths, social events, and more",
-    "keywords": ["statistics", "world", "real-time", "population", "global data"]
+    "keywords": [
+      "statistics",
+      "world",
+      "real-time",
+      "population",
+      "global data"
+    ]
   },
   "layout": {
     "title": "🌍 Real-Time World Statistics",
@@ -15,8 +21,7 @@
     "label": "Language",
     "languages": {
       "fr": "French",
-      "en": "English",
-      "es": "Spanish"
+      "en": "English"
     }
   },
   "cumulativeTable": {
@@ -75,5 +80,15 @@
     "europe": "Europe",
     "latinAmerica": "Lat. Am.",
     "oceania": "Oceania"
+  },
+  "statDetails": {
+    "rate": "Rate",
+    "second": "second",
+    "minute": "minute",
+    "every": "1 every",
+    "formula": "Formula",
+    "elapsedSeconds": "elapsed seconds",
+    "source": "Source",
+    "about": "About"
   }
 }

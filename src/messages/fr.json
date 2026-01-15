@@ -2,7 +2,13 @@
   "metadata": {
     "title": "WeirdStats - Statistiques Mondiales en Temps Réel",
     "description": "Dashboard en temps réel des statistiques mondiales - naissances, décès, événements sociaux et plus encore",
-    "keywords": ["statistiques", "monde", "temps réel", "population", "données mondiales"]
+    "keywords": [
+      "statistiques",
+      "monde",
+      "temps réel",
+      "population",
+      "données mondiales"
+    ]
   },
   "layout": {
     "title": "🌍 Statistiques Mondiales en Temps Réel",
@@ -15,8 +21,7 @@
     "label": "Langue",
     "languages": {
       "fr": "Français",
-      "en": "Anglais",
-      "es": "Espagnol"
+      "en": "Anglais"
     }
   },
   "cumulativeTable": {
@@ -75,5 +80,15 @@
     "europe": "Europe",
     "latinAmerica": "Am. Lat.",
     "oceania": "Océanie"
+  },
+  "statDetails": {
+    "rate": "Taux",
+    "second": "seconde",
+    "minute": "minute",
+    "every": "1 toutes les",
+    "formula": "Formule",
+    "elapsedSeconds": "secondes écoulées",
+    "source": "Source",
+    "about": "À propos"
   }
 }
