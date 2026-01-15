@@ -59,6 +59,69 @@ export interface SnapshotStats {
   unemployed: number
 }
 
+/**
+ * Stats for a single metric across all time periods
+ */
+export interface MultiPeriodValue {
+  year: number
+  month: number
+  today: number
+  session: number
+}
+
+/**
+ * Time periods data for calculations
+ */
+export interface TimePeriods {
+  yearSeconds: number
+  monthSeconds: number
+  todaySeconds: number
+  sessionSeconds: number
+}
+
+/**
+ * Complete multi-period stats structure
+ */
+export interface MultiPeriodStats {
+  // Deaths breakdown
+  deaths: {
+    murder: MultiPeriodValue
+    suicide: MultiPeriodValue
+    tobacco: MultiPeriodValue
+    hunger: MultiPeriodValue
+    road: MultiPeriodValue
+    other: MultiPeriodValue
+    total: MultiPeriodValue
+  }
+  // Births & growth
+  births: MultiPeriodValue
+  netGrowth: MultiPeriodValue
+  // Injuries
+  injuries: {
+    brokenLeg: MultiPeriodValue
+    brokenArm: MultiPeriodValue
+  }
+  // Social
+  social: {
+    marriages: MultiPeriodValue
+    divorces: MultiPeriodValue
+    abandonments: MultiPeriodValue
+    adoptions: MultiPeriodValue
+  }
+  // Physiological
+  physiological: {
+    poop: MultiPeriodValue
+    pee: MultiPeriodValue
+    sneezes: MultiPeriodValue
+    waterConsumed: MultiPeriodValue
+  }
+  // Pool equivalents
+  pools: {
+    poopPools: MultiPeriodValue
+    peePools: MultiPeriodValue
+  }
+}
+
 export interface StatsState {
   currentPopulation: number
   sessionStartTime: number
@@ -66,3 +129,4 @@ export interface StatsState {
   cumulative: CumulativeStats
   snapshot: SnapshotStats[]
 }
+

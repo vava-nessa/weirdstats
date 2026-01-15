@@ -1,24 +1,28 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import { calculateSnapshotStats, calculateCurrentPopulation } from '@/lib/calculations'
 import { REGIONS } from '@/lib/constants'
 import { SnapshotStats } from '@/types/stats'
 
 /**
- * Custom hook for fetching snapshot statistics
+ * Custom hook for calculating snapshot statistics
+ * Uses useMemo to recalculate based on elapsedSeconds without triggering re-fetches
  * @param elapsedSeconds - Time elapsed since session start
- * @returns Query result with snapshot statistics and current population
+ * @returns Object with snapshot statistics, current population, and loading state
  */
 export function useSnapshotStats(elapsedSeconds: number) {
-  return useQuery<{ snapshot: SnapshotStats[]; currentPopulation: number }>({
-    queryKey: ['snapshotStats', elapsedSeconds],
-    queryFn: () => {
+  const data = useMemo<{ snapshot: SnapshotStats[]; currentPopulation: number }>(
+    () => {
       const currentPopulation = calculateCurrentPopulation(elapsedSeconds)
       const snapshot = calculateSnapshotStats(REGIONS, currentPopulation)
       return { snapshot, currentPopulation }
     },
-    refetchInterval: 100,
-    staleTime: 0,
-  })
+    [elapsedSeconds]
+  )
+
+  return {
+    data,
+    isLoading: false,
+  }
 }

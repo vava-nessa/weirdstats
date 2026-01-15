@@ -1,7 +1,7 @@
 'use client'
 
 import { StatsLayout } from '@/components/layout/StatsLayout'
-import { SessionTimer } from '@/components/stats/SessionTimer'
+
 import { CumulativeStatsTable } from '@/components/stats/CumulativeStatsTable'
 import { SnapshotStatsTable } from '@/components/stats/SnapshotStatsTable'
 import { PopulationCounter } from '@/components/stats/PopulationCounter'
@@ -28,11 +28,8 @@ export default function Home() {
   return (
     <StatsLayout>
       <div className="space-y-6">
-        {/* Session Timer */}
-        <SessionTimer elapsedSeconds={elapsedSeconds} />
-
         {/* Cumulative Stats Table */}
-        <CumulativeStatsTable stats={cumulative} />
+        <CumulativeStatsTable stats={cumulative} elapsedSeconds={elapsedSeconds} />
 
         {/* Snapshot Stats Table */}
         <SnapshotStatsTable stats={snapshot} />

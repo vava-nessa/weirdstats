@@ -10,7 +10,8 @@ import {
   TableHead,
   TableCell,
 } from '@/components/ui/Table'
-import { formatNumber } from '@/lib/formatters'
+import { AnimatedNumber } from '@/components/ui/AnimatedNumber'
+import { ANIMATION_PRESETS } from '@/lib/animationConfig'
 
 interface SnapshotStatsTableProps {
   stats: SnapshotStats[]
@@ -48,24 +49,32 @@ export function SnapshotStatsTable({ stats }: SnapshotStatsTableProps) {
                 </span>
               </TableCell>
               <TableCell className="text-right">
-                <span className="font-mono tabular-nums text-gray-700">
-                  {formatNumber(stat.atHome)}
-                </span>
+                <AnimatedNumber
+                  to={stat.atHome}
+                  className="font-mono text-gray-700"
+                  {...ANIMATION_PRESETS.snappy}
+                />
               </TableCell>
               <TableCell className="text-right">
-                <span className="font-mono tabular-nums text-gray-700">
-                  {formatNumber(stat.atWork)}
-                </span>
+                <AnimatedNumber
+                  to={stat.atWork}
+                  className="font-mono text-gray-700"
+                  {...ANIMATION_PRESETS.snappy}
+                />
               </TableCell>
               <TableCell className="text-right">
-                <span className="font-mono tabular-nums text-gray-700">
-                  {formatNumber(stat.inTransit)}
-                </span>
+                <AnimatedNumber
+                  to={stat.inTransit}
+                  className="font-mono text-gray-700"
+                  {...ANIMATION_PRESETS.snappy}
+                />
               </TableCell>
               <TableCell className="text-right">
-                <span className="font-mono tabular-nums text-gray-700">
-                  {formatNumber(stat.unemployed)}
-                </span>
+                <AnimatedNumber
+                  to={stat.unemployed}
+                  className="font-mono text-gray-700"
+                  {...ANIMATION_PRESETS.snappy}
+                />
               </TableCell>
             </TableRow>
           ))}

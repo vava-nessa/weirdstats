@@ -1,19 +1,21 @@
-'use client'
-
-import { useQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import { calculateCumulativeStats } from '@/lib/calculations'
-import { CumulativeStats } from '@/types/stats'
+import { MultiPeriodStats } from '@/types/stats'
 
 /**
- * Custom hook for fetching cumulative statistics
+ * Custom hook for calculating cumulative statistics
+ * Uses useMemo to recalculate based on elapsedSeconds without triggering re-fetches
  * @param elapsedSeconds - Time elapsed since session start
- * @returns Query result with cumulative statistics
+ * @returns Object with cumulative statistics data and loading state
  */
 export function useCumulativeStats(elapsedSeconds: number) {
-  return useQuery<CumulativeStats>({
-    queryKey: ['cumulativeStats', elapsedSeconds],
-    queryFn: () => calculateCumulativeStats(elapsedSeconds),
-    refetchInterval: 100,
-    staleTime: 0,
-  })
+  const data = useMemo<MultiPeriodStats>(
+    () => calculateCumulativeStats(elapsedSeconds),
+    [elapsedSeconds]
+  )
+
+  return {
+    data,
+    isLoading: false,
+  }
 }

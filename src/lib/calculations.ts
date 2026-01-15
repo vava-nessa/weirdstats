@@ -1,129 +1,128 @@
 import {
-  CumulativeStats,
-  DeathStats,
-  InjuryStats,
-  PhysiologicalStats,
-  PoolStats,
+  MultiPeriodStats,
+  MultiPeriodValue,
+  TimePeriods,
   Region,
   SnapshotStats,
-  SocialStats,
 } from '@/types/stats'
 import { BASE_POPULATION_2026, POOL_VOLUME, RATES } from './constants'
 
 /**
- * Calculates death statistics based on elapsed time
- * @param elapsedSeconds - Time elapsed since session start
- * @returns Death statistics broken down by cause
+ * Calculates seconds elapsed for different time periods
+ * @param sessionSeconds - Seconds elapsed in current session
  */
-export function calculateDeaths(elapsedSeconds: number): DeathStats {
-  const murder = RATES.murder * elapsedSeconds
-  const suicide = RATES.suicide * elapsedSeconds
-  const tobacco = RATES.tobacco * elapsedSeconds
-  const hunger = RATES.hunger * elapsedSeconds
-  const road = RATES.road * elapsedSeconds
-  const other = RATES.otherDeaths * elapsedSeconds
-  
+function calculateTimePeriods(sessionSeconds: number): TimePeriods {
+  const now = new Date()
+
+  // Start of Year
+  const startOfYear = new Date(now.getFullYear(), 0, 1)
+  const yearSeconds = (now.getTime() - startOfYear.getTime()) / 1000
+
+  // Start of Month
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
+  const monthSeconds = (now.getTime() - startOfMonth.getTime()) / 1000
+
+  // Start of Day (Today)
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const todaySeconds = (now.getTime() - startOfDay.getTime()) / 1000
+
   return {
-    murder,
-    suicide,
-    tobacco,
-    hunger,
-    road,
-    other,
-    total: murder + suicide + tobacco + hunger + road + other,
+    yearSeconds,
+    monthSeconds,
+    todaySeconds,
+    sessionSeconds,
   }
 }
 
 /**
- * Calculates total births based on elapsed time
- * @param elapsedSeconds - Time elapsed since session start
- * @returns Number of births
+ * Helper to calculate a stat value across all time periods
  */
-export function calculateBirths(elapsedSeconds: number): number {
-  return RATES.birth * elapsedSeconds
-}
-
-/**
- * Calculates net population growth (births - deaths)
- * @param births - Total births
- * @param deaths - Total deaths
- * @returns Net population change
- */
-export function calculateNetGrowth(births: number, deaths: number): number {
-  return births - deaths
-}
-
-/**
- * Calculates injury statistics based on elapsed time
- * @param elapsedSeconds - Time elapsed since session start
- * @returns Injury statistics
- */
-export function calculateInjuries(elapsedSeconds: number): InjuryStats {
+function getMultiPeriodValue(rate: number, periods: TimePeriods): MultiPeriodValue {
   return {
-    brokenLeg: RATES.brokenLeg * elapsedSeconds,
-    brokenArm: RATES.brokenArm * elapsedSeconds,
+    year: rate * periods.yearSeconds,
+    month: rate * periods.monthSeconds,
+    today: rate * periods.todaySeconds,
+    session: rate * periods.sessionSeconds,
   }
 }
 
 /**
- * Calculates social event statistics based on elapsed time
- * @param elapsedSeconds - Time elapsed since session start
- * @returns Social event statistics
- */
-export function calculateSocial(elapsedSeconds: number): SocialStats {
-  return {
-    marriages: RATES.marriage * elapsedSeconds,
-    divorces: RATES.divorce * elapsedSeconds,
-    abandonments: RATES.abandoned * elapsedSeconds,
-    adoptions: RATES.adopted * elapsedSeconds,
-  }
-}
-
-/**
- * Calculates physiological event statistics based on elapsed time
- * @param elapsedSeconds - Time elapsed since session start
- * @returns Physiological event statistics
- */
-export function calculatePhysiological(
-  elapsedSeconds: number
-): PhysiologicalStats {
-  return {
-    poop: RATES.poop * elapsedSeconds,
-    pee: RATES.pee * elapsedSeconds,
-    sneezes: RATES.sneeze * elapsedSeconds,
-    waterConsumed: RATES.water * elapsedSeconds,
-  }
-}
-
-/**
- * Calculates pool equivalents for waste products
- * @param physiological - Physiological statistics
- * @returns Pool statistics (number of Olympic pools)
- */
-export function calculatePools(
-  physiological: PhysiologicalStats
-): PoolStats {
-  return {
-    poopPools: physiological.poop / POOL_VOLUME,
-    peePools: physiological.pee / POOL_VOLUME,
-  }
-}
-
-/**
- * Calculates all cumulative statistics for a given elapsed time
- * @param elapsedSeconds - Time elapsed since session start
- * @returns Complete cumulative statistics
+ * Calculates all cumulative statistics for all time periods
+ * @param sessionSeconds - Time elapsed since session start
+ * @returns Complete multi-period statistics
  */
 export function calculateCumulativeStats(
-  elapsedSeconds: number
-): CumulativeStats {
-  const deaths = calculateDeaths(elapsedSeconds)
-  const births = calculateBirths(elapsedSeconds)
-  const netGrowth = calculateNetGrowth(births, deaths.total)
-  const injuries = calculateInjuries(elapsedSeconds)
-  const social = calculateSocial(elapsedSeconds)
-  const physiological = calculatePhysiological(elapsedSeconds)
-  const pools = calculatePools(physiological)
+  sessionSeconds: number
+): MultiPeriodStats {
+  const periods = calculateTimePeriods(sessionSeconds)
+
+  // Deaths
+  const deaths = {
+    murder: getMultiPeriodValue(RATES.murder, periods),
+    suicide: getMultiPeriodValue(RATES.suicide, periods),
+    tobacco: getMultiPeriodValue(RATES.tobacco, periods),
+    hunger: getMultiPeriodValue(RATES.hunger, periods),
+    road: getMultiPeriodValue(RATES.road, periods),
+    other: getMultiPeriodValue(RATES.otherDeaths, periods),
+    total: { year: 0, month: 0, today: 0, session: 0 } // Placeholder, calculated below
+  }
+
+  // Calculate total deaths for each period
+  deaths.total = {
+    year: deaths.murder.year + deaths.suicide.year + deaths.tobacco.year + deaths.hunger.year + deaths.road.year + deaths.other.year,
+    month: deaths.murder.month + deaths.suicide.month + deaths.tobacco.month + deaths.hunger.month + deaths.road.month + deaths.other.month,
+    today: deaths.murder.today + deaths.suicide.today + deaths.tobacco.today + deaths.hunger.today + deaths.road.today + deaths.other.today,
+    session: deaths.murder.session + deaths.suicide.session + deaths.tobacco.session + deaths.hunger.session + deaths.road.session + deaths.other.session,
+  }
+
+  // Births
+  const births = getMultiPeriodValue(RATES.birth, periods)
+
+  // Net Growth
+  const netGrowth = {
+    year: births.year - deaths.total.year,
+    month: births.month - deaths.total.month,
+    today: births.today - deaths.total.today,
+    session: births.session - deaths.total.session,
+  }
+
+  // Injuries
+  const injuries = {
+    brokenLeg: getMultiPeriodValue(RATES.brokenLeg, periods),
+    brokenArm: getMultiPeriodValue(RATES.brokenArm, periods),
+  }
+
+  // Social
+  const social = {
+    marriages: getMultiPeriodValue(RATES.marriage, periods),
+    divorces: getMultiPeriodValue(RATES.divorce, periods),
+    abandonments: getMultiPeriodValue(RATES.abandoned, periods),
+    adoptions: getMultiPeriodValue(RATES.adopted, periods),
+  }
+
+  // Physiological
+  const physiological = {
+    poop: getMultiPeriodValue(RATES.poop, periods),
+    pee: getMultiPeriodValue(RATES.pee, periods),
+    sneezes: getMultiPeriodValue(RATES.sneeze, periods),
+    waterConsumed: getMultiPeriodValue(RATES.water, periods),
+  }
+
+  // Pools (calculated from physiological volume / POOL_VOLUME)
+  const pools = {
+    poopPools: {
+      year: physiological.poop.year / POOL_VOLUME,
+      month: physiological.poop.month / POOL_VOLUME,
+      today: physiological.poop.today / POOL_VOLUME,
+      session: physiological.poop.session / POOL_VOLUME,
+    },
+    peePools: {
+      year: physiological.pee.year / POOL_VOLUME,
+      month: physiological.pee.month / POOL_VOLUME,
+      today: physiological.pee.today / POOL_VOLUME,
+      session: physiological.pee.session / POOL_VOLUME,
+    },
+  }
 
   return {
     deaths,
@@ -143,7 +142,7 @@ export function calculateCumulativeStats(
  */
 export function calculateCurrentPopulation(elapsedSeconds: number): number {
   const stats = calculateCumulativeStats(elapsedSeconds)
-  return BASE_POPULATION_2026 + stats.netGrowth
+  return BASE_POPULATION_2026 + stats.netGrowth.year
 }
 
 /**

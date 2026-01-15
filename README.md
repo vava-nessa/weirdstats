@@ -4,7 +4,8 @@ A real-time world statistics simulation dashboard built with Next.js, displaying
 
 ## ✨ Features
 
-- **Real-time Updates**: Statistics refresh every 100ms using TanStack Query
+- **Real-time Updates**: Statistics refresh every 100ms with smooth transitions
+- **🎬 Animated Numbers**: Smooth spring-physics animations for all counters (configurable)
 - **Two Types of Statistics**:
   - **Cumulative Stats**: Events that accumulate over your session (deaths, births, injuries, marriages, etc.)
   - **Snapshot Stats**: Real-time distribution by continent (people at home, at work, in transit, unemployed)
@@ -19,10 +20,12 @@ A real-time world statistics simulation dashboard built with Next.js, displaying
 - **Framework**: [Next.js 14+](https://nextjs.org/) with App Router
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **State Management**: [TanStack Query (React Query)](https://tanstack.com/query/)
+- **Animation**: [Framer Motion](https://www.framer.com/motion/) for smooth number transitions
+- **State Management**: useMemo for derived calculations
 - **Data Tables**: [TanStack Table](https://tanstack.com/table/)
-- **Package Manager**: npm
+- **Package Manager**: pnpm
 - **Code Quality**: ESLint + Prettier
+
 
 ## 📦 Installation
 
@@ -84,6 +87,7 @@ weirdstats/
 │   │   │   ├── SessionTimer.tsx
 │   │   │   └── StatRow.tsx
 │   │   ├── ui/                  # Base UI components
+│   │   │   ├── AnimatedNumber.tsx  # 🎬 Animated counter component
 │   │   │   ├── Table.tsx
 │   │   │   └── Card.tsx
 │   │   └── layout/              # Layout components
@@ -94,10 +98,10 @@ weirdstats/
 │   │   ├── useSnapshotStats.ts
 │   │   └── useSessionTimer.ts
 │   ├── lib/                     # Utility functions
+│   │   ├── animationConfig.ts   # 🎛️ Animation settings & presets
 │   │   ├── constants.ts         # Rates, regions, pool volume
 │   │   ├── calculations.ts      # Stat calculation logic
-│   │   ├── formatters.ts        # Number formatting
-│   │   └── types.ts
+│   │   └── formatters.ts        # Number formatting
 │   └── types/
 │       └── stats.ts             # TypeScript interfaces
 ├── package.json
@@ -109,22 +113,131 @@ weirdstats/
 
 ## 🏗️ Architecture Decisions
 
-### Why TanStack Query?
+### State Management with useMemo
 
-TanStack Query provides:
-- **Automatic refetching** with configurable intervals (100ms for real-time feel)
-- **Caching and synchronization** across components
-- **Loading and error states** out of the box
-- **Optimized re-renders** only when data changes
+Statistics are calculated using `useMemo` hooks that recompute when elapsed time changes:
+- **No external API calls** - all data is derived from rates and elapsed time
+- **Smooth updates** - timer ticks every 100ms, memoized calculations prevent unnecessary re-renders
+- **Type-safe** - full TypeScript interfaces for all data structures
 
 ### Component Design Philosophy
 
 - **Separation of Concerns**: Business logic in `lib/`, presentation in `components/`
 - **Composition over Configuration**: Small, focused components that compose together
 - **Type Safety**: Strict TypeScript with proper interfaces for all data structures
-- **Reusability**: Generic UI components (`Card`, `Table`) used throughout
+- **Reusability**: Generic UI components (`Card`, `Table`, `AnimatedNumber`) used throughout
 
-### Type Safety Approach
+---
+
+## 🎬 AnimatedNumber Component
+
+A reusable animated number component that smoothly transitions between values using spring physics.
+
+### Location
+- **Component**: `src/components/ui/AnimatedNumber.tsx`
+- **Configuration**: `src/lib/animationConfig.ts`
+
+### Basic Usage
+
+```tsx
+import { AnimatedNumber } from '@/components/ui/AnimatedNumber'
+
+// Simple usage
+<AnimatedNumber to={1500} />
+
+// With formatting
+<AnimatedNumber to={1500000} separator="," useCompactNotation={true} />
+```
+
+### Props Reference
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `to` | `number` | **required** | The target number to animate to |
+| `from` | `number` | `0` | Initial number (only on mount) |
+| `direction` | `"up" \| "down"` | `"up"` | Direction of count |
+| `delay` | `number` | `0` | Delay before animation starts (seconds) |
+| `duration` | `number` | `0.5` | Animation duration factor |
+| `className` | `string` | `""` | CSS class for styling |
+| `startWhen` | `boolean` | `true` | Control when animation starts |
+| `separator` | `string` | `" "` | Thousands separator (` ` French, `,` US) |
+| `useCompactNotation` | `boolean` | `true` | Use K/M suffixes |
+| `compactDecimals` | `number` | `1` | Decimals for K/M notation |
+| `compactThresholdK` | `number` | `1000` | Threshold for K suffix |
+| `compactThresholdM` | `number` | `1000000` | Threshold for M suffix |
+| `damping` | `number` | `60` | Spring damping (10-100) |
+| `stiffness` | `number` | `100` | Spring stiffness (50-500) |
+| `mass` | `number` | `1` | Spring mass (0.1-10) |
+| `onStart` | `() => void` | — | Callback when animation starts |
+| `onEnd` | `() => void` | — | Callback when animation ends |
+
+### Animation Presets
+
+Ready-to-use animation presets in `src/lib/animationConfig.ts`:
+
+```tsx
+import { ANIMATION_PRESETS } from '@/lib/animationConfig'
+
+// Balanced default
+<AnimatedNumber to={100} {...ANIMATION_PRESETS.default} />
+
+// Fast, snappy (good for rapid updates)
+<AnimatedNumber to={100} {...ANIMATION_PRESETS.snappy} />
+
+// Smooth, fluid (good for large changes)
+<AnimatedNumber to={100} {...ANIMATION_PRESETS.smooth} />
+
+// Bouncy, playful (good for celebrations)
+<AnimatedNumber to={100} {...ANIMATION_PRESETS.bouncy} />
+
+// Instant, no animation
+<AnimatedNumber to={100} {...ANIMATION_PRESETS.instant} />
+```
+
+### Customizing Global Defaults
+
+Edit `src/lib/animationConfig.ts` to change defaults for all AnimatedNumber instances:
+
+```typescript
+// ─── src/lib/animationConfig.ts ───────────────────────────────
+
+export const DEFAULT_ANIMATION_CONFIG: AnimationConfig = {
+  // ─── Timing ──────────────────────────────────────────────
+  duration: 0.5,      // Animation duration (seconds)
+  delay: 0,           // Delay before start (seconds)
+
+  // ─── Spring Physics ──────────────────────────────────────
+  damping: 60,        // Higher = less bouncy (10-100)
+  stiffness: 100,     // Higher = faster snap (50-500)
+  mass: 1,            // Higher = more inertia (0.1-10)
+
+  // ─── Formatting ──────────────────────────────────────────
+  separator: ' ',           // Thousands separator
+  useCompactNotation: true, // Show 1.5K, 1.5M
+  compactDecimals: 1,       // Decimal places for K/M
+  compactThresholdK: 1000,  // When to use K
+  compactThresholdM: 1000000, // When to use M
+}
+```
+
+### Spring Physics Explained
+
+The animation uses Framer Motion's spring physics:
+
+| Parameter | Low Value | High Value |
+|-----------|-----------|------------|
+| **damping** | More oscillation/bounce | Smooth, controlled |
+| **stiffness** | Slow, fluid | Fast, snappy |
+| **mass** | Light, responsive | Heavy, more inertia |
+
+**Recommended combinations:**
+
+- **Real-time stats**: `damping: 80, stiffness: 200` (snappy preset)
+- **Large counters**: `damping: 40, stiffness: 60` (smooth preset)
+- **Gamification**: `damping: 15, stiffness: 80` (bouncy preset)
+
+---
+
 
 - All statistics have proper TypeScript interfaces
 - No `any` types allowed (enforced by ESLint)
