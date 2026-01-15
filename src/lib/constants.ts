@@ -33,6 +33,8 @@ export const RATES = {
   // Social events per second
   marriage: 1 / 0.7,
   divorce: 1 / 1.8,
+  coupleFormation: 12,
+  breakup: 4,
   abandoned: 1 / 15,
   adopted: 1 / 120,
   

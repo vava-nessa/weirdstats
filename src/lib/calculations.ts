@@ -96,6 +96,8 @@ export function calculateCumulativeStats(
   const social = {
     marriages: getMultiPeriodValue(RATES.marriage, periods),
     divorces: getMultiPeriodValue(RATES.divorce, periods),
+    coupleFormations: getMultiPeriodValue(RATES.coupleFormation, periods),
+    breakups: getMultiPeriodValue(RATES.breakup, periods),
     abandonments: getMultiPeriodValue(RATES.abandoned, periods),
     adoptions: getMultiPeriodValue(RATES.adopted, periods),
   }

@@ -180,7 +180,100 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
         </Table>
       </Card>
 
-      {/* Second Table: Weird Stats */}
+      {/* Second Table: Love & Family */}
+      <Card className="overflow-hidden">
+        <div className="px-4 py-3 bg-gray-100 border-b border-gray-200">
+          <h2 className="text-lg font-semibold text-gray-900">
+            {t('loveFamilyTitle')}
+          </h2>
+        </div>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[34%]">{t('columns.indicator')}</TableHead>
+              <TableHead className="text-right w-[15%] text-gray-500">
+                {t('columns.year')}
+              </TableHead>
+              <TableHead className="text-right w-[15%] text-gray-500">{capitalizedMonth}</TableHead>
+              <TableHead className="text-right w-[15%] text-gray-800">
+                {t('columns.today')}
+              </TableHead>
+              <TableHead className="text-right w-[21%] text-blue-500">
+                {t('columns.now')}{' '}
+                <span className="font-mono opacity-70 ml-1">
+                  {formatTime(elapsedSeconds)}
+                </span>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {/* Social Section */}
+            <ExpandableStatRow
+              statKey="social.marriages"
+              label={t('labels.socialMarriages')}
+              values={stats.social.marriages}
+              metadata={STAT_METADATA['social.marriages']}
+              bgColor="bg-amber-50"
+              textColor="text-amber-700"
+              isExpanded={expandedRows.has('social.marriages')}
+              onToggle={toggleRow}
+            />
+            <ExpandableStatRow
+              statKey="social.divorces"
+              label={t('labels.socialDivorces')}
+              values={stats.social.divorces}
+              metadata={STAT_METADATA['social.divorces']}
+              bgColor="bg-amber-50"
+              textColor="text-amber-700"
+              isExpanded={expandedRows.has('social.divorces')}
+              onToggle={toggleRow}
+            />
+            <ExpandableStatRow
+              statKey="social.coupleFormations"
+              label={t('labels.socialCoupleFormations')}
+              values={stats.social.coupleFormations}
+              metadata={STAT_METADATA['social.coupleFormations']}
+              bgColor="bg-pink-50"
+              textColor="text-pink-700"
+              isExpanded={expandedRows.has('social.coupleFormations')}
+              onToggle={toggleRow}
+            />
+            <ExpandableStatRow
+              statKey="social.breakups"
+              label={t('labels.socialBreakups')}
+              values={stats.social.breakups}
+              metadata={STAT_METADATA['social.breakups']}
+              bgColor="bg-pink-50"
+              textColor="text-pink-700"
+              isExpanded={expandedRows.has('social.breakups')}
+              onToggle={toggleRow}
+            />
+            <ExpandableStatRow
+              statKey="social.abandonments"
+              label={t('labels.socialAbandonments')}
+              values={stats.social.abandonments}
+              metadata={STAT_METADATA['social.abandonments']}
+              bgColor="bg-amber-50"
+              textColor="text-amber-700"
+              isExpanded={expandedRows.has('social.abandonments')}
+              onToggle={toggleRow}
+            />
+            <ExpandableStatRow
+              statKey="social.adoptions"
+              label={t('labels.socialAdoptions')}
+              values={stats.social.adoptions}
+              metadata={STAT_METADATA['social.adoptions']}
+              bgColor="bg-amber-50"
+              textColor="text-amber-700"
+              isExpanded={expandedRows.has('social.adoptions')}
+              onToggle={toggleRow}
+            />
+          </TableBody>
+        </Table>
+      </Card>
+
+      {/* Third Table: Weird Stats */}
       <Card className="overflow-hidden">
         <div className="px-4 py-3 bg-gray-100 border-b border-gray-200">
           <h2 className="text-lg font-semibold text-gray-900">
@@ -227,48 +320,6 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
               bgColor="bg-orange-50"
               textColor="text-orange-700"
               isExpanded={expandedRows.has('injuries.brokenArm')}
-              onToggle={toggleRow}
-            />
-
-            {/* Social Section */}
-            <ExpandableStatRow
-              statKey="social.marriages"
-              label={t('labels.socialMarriages')}
-              values={stats.social.marriages}
-              metadata={STAT_METADATA['social.marriages']}
-              bgColor="bg-amber-50"
-              textColor="text-amber-700"
-              isExpanded={expandedRows.has('social.marriages')}
-              onToggle={toggleRow}
-            />
-            <ExpandableStatRow
-              statKey="social.divorces"
-              label={t('labels.socialDivorces')}
-              values={stats.social.divorces}
-              metadata={STAT_METADATA['social.divorces']}
-              bgColor="bg-amber-50"
-              textColor="text-amber-700"
-              isExpanded={expandedRows.has('social.divorces')}
-              onToggle={toggleRow}
-            />
-            <ExpandableStatRow
-              statKey="social.abandonments"
-              label={t('labels.socialAbandonments')}
-              values={stats.social.abandonments}
-              metadata={STAT_METADATA['social.abandonments']}
-              bgColor="bg-amber-50"
-              textColor="text-amber-700"
-              isExpanded={expandedRows.has('social.abandonments')}
-              onToggle={toggleRow}
-            />
-            <ExpandableStatRow
-              statKey="social.adoptions"
-              label={t('labels.socialAdoptions')}
-              values={stats.social.adoptions}
-              metadata={STAT_METADATA['social.adoptions']}
-              bgColor="bg-amber-50"
-              textColor="text-amber-700"
-              isExpanded={expandedRows.has('social.adoptions')}
               onToggle={toggleRow}
             />
 

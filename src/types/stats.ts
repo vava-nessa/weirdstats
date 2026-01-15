@@ -25,6 +25,8 @@ export interface InjuryStats {
 export interface SocialStats {
   marriages: number
   divorces: number
+  coupleFormations: number
+  breakups: number
   abandonments: number
   adoptions: number
 }
@@ -105,6 +107,8 @@ export interface MultiPeriodStats {
   social: {
     marriages: MultiPeriodValue
     divorces: MultiPeriodValue
+    coupleFormations: MultiPeriodValue
+    breakups: MultiPeriodValue
     abandonments: MultiPeriodValue
     adoptions: MultiPeriodValue
   }

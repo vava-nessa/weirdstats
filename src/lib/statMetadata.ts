@@ -197,6 +197,22 @@ export const STAT_METADATA: Record<string, StatMetadata> = {
     explanation:
       'Divorces finalized worldwide. Divorce rates are highest in developed countries with accessible legal systems.',
   },
+  'social.coupleFormations': {
+    id: 'social.coupleFormations',
+    ratePerSecond: RATES.coupleFormation,
+    unit: 'couples',
+    source: 'Global Relationship Statistics',
+    explanation:
+      'New romantic relationships (unmarried couples) formed worldwide each second. Includes dating, partnerships, and cohabitation.',
+  },
+  'social.breakups': {
+    id: 'social.breakups',
+    ratePerSecond: RATES.breakup,
+    unit: 'breakups',
+    source: 'Global Relationship Statistics',
+    explanation:
+      'Romantic relationship breakups (unmarried couples) worldwide. More common than divorces as they include all types of partnerships.',
+  },
   'social.abandonments': {
     id: 'social.abandonments',
     ratePerSecond: RATES.abandoned,

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "WeirdStats - Statistiques Mondiales en Temps Réel",
-    "description": "Dashboard en temps réel des statistiques mondiales - naissances, décès, événements sociaux et plus encore",
+    "description": "Tableau de bord en temps réel des statistiques mondiales - naissances, décès, événements sociaux et plus encore",
     "keywords": [
       "statistiques",
       "monde",
@@ -35,6 +35,7 @@
   "cumulativeTable": {
     "title": "📊 Événements Cumulés",
     "weirdTitle": "🤪 Stats Bizarres",
+    "loveFamilyTitle": "💕 Amour & Famille",
     "columns": {
       "indicator": "Indicateur",
       "year": "2026",
@@ -55,6 +56,8 @@
       "injuriesBrokenArm": "💪 Bras cassés",
       "socialMarriages": "💑 Mariages",
       "socialDivorces": "💔 Divorces",
+      "socialCoupleFormations": "❤️ Nouveaux couples",
+      "socialBreakups": "💢 Ruptures",
       "socialAbandonments": "📦 Abandons",
       "socialAdoptions": "🏠 Adoptions",
       "physiologicalPoop": "💩 Cacas (litres)",
@@ -72,7 +75,7 @@
       "region": "Région",
       "home": "Maison",
       "work": "Travail",
-      "transit": "Transit",
+      "transit": "Transports",
       "unemployed": "Chômage"
     }
   },
