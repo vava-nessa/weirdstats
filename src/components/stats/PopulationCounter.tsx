@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 import { AnimatedNumber } from '@/components/ui/AnimatedNumber'
 import { ANIMATION_PRESETS } from '@/lib/animationConfig'
 
@@ -8,10 +10,12 @@ interface PopulationCounterProps {
 }
 
 export function PopulationCounter({ population }: PopulationCounterProps) {
+  const t = useTranslations('populationCounter')
+
   return (
     <div className="bg-gray-900 text-white py-6 px-4 text-center rounded-lg">
       <div className="text-sm uppercase tracking-wide mb-2 text-gray-400">
-        Population Mondiale
+        {t('label')}
       </div>
       <div className="text-4xl md:text-5xl font-bold font-mono">
         <AnimatedNumber
@@ -25,4 +29,3 @@ export function PopulationCounter({ population }: PopulationCounterProps) {
     </div>
   )
 }
-

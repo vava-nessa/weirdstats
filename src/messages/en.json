@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "title": "WeirdStats - Real-Time World Statistics",
+    "description": "Real-time dashboard for world statistics - births, deaths, social events, and more",
+    "keywords": ["statistics", "world", "real-time", "population", "global data"]
+  },
+  "layout": {
+    "title": "🌍 Real-Time World Statistics",
+    "subtitle": "Live simulation of global events"
+  },
+  "loading": {
+    "stats": "Loading statistics..."
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "languages": {
+      "fr": "French",
+      "en": "English",
+      "es": "Spanish"
+    }
+  },
+  "cumulativeTable": {
+    "title": "📊 Cumulative Events",
+    "columns": {
+      "indicator": "Indicator",
+      "year": "2026",
+      "today": "Today",
+      "now": "Now"
+    },
+    "labels": {
+      "deathsTotal": "⚠️ Total deaths",
+      "deathsMurder": "💀 🔫 Murders",
+      "deathsSuicide": "💀 💊 Suicides",
+      "deathsTobacco": "💀 🚬 Tobacco",
+      "deathsHunger": "💀 🌾 Hunger",
+      "deathsRoad": "💀 🚗 Road accidents",
+      "deathsOther": "💀 ⚰️ Other causes",
+      "births": "👶 Births",
+      "netGrowth": "📈 Net growth",
+      "injuriesBrokenLeg": "🦴 Broken legs",
+      "injuriesBrokenArm": "💪 Broken arms",
+      "socialMarriages": "💑 Marriages",
+      "socialDivorces": "💔 Divorces",
+      "socialAbandonments": "📦 Abandonments",
+      "socialAdoptions": "🏠 Adoptions",
+      "physiologicalPoop": "💩 Poop (liters)",
+      "physiologicalPee": "💧 Pee (liters)",
+      "physiologicalSneezes": "🤧 Sneezes",
+      "physiologicalWaterConsumed": "🚰 Water consumed (liters)",
+      "poolsPoop": "🏊 Olympic pool of poop",
+      "poolsPee": "🏊 Olympic pool of pee"
+    }
+  },
+  "snapshotTable": {
+    "title": "Real-Time Distribution",
+    "subtitle": "By continent",
+    "columns": {
+      "region": "Region",
+      "home": "Home",
+      "work": "Work",
+      "transit": "Transit",
+      "unemployed": "Unemployed"
+    }
+  },
+  "sessionTimer": {
+    "label": "Session time"
+  },
+  "populationCounter": {
+    "label": "World Population"
+  },
+  "regions": {
+    "asia": "Asia",
+    "africa": "Africa",
+    "northAmerica": "USA/Can",
+    "europe": "Europe",
+    "latinAmerica": "Lat. Am.",
+    "oceania": "Oceania"
+  }
+}

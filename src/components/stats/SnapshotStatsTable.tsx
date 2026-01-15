@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 import { SnapshotStats } from '@/types/stats'
 import { Card } from '@/components/ui/Card'
 import {
@@ -18,23 +20,26 @@ interface SnapshotStatsTableProps {
 }
 
 export function SnapshotStatsTable({ stats }: SnapshotStatsTableProps) {
+  const t = useTranslations('snapshotTable')
+  const tRegions = useTranslations('regions')
+
   return (
     <Card className="overflow-hidden">
       <div className="px-4 py-3 bg-gray-100 border-b border-gray-200">
         <h2 className="text-lg font-semibold text-gray-900">
-          Distribution en Temps Réel
+          {t('title')}
         </h2>
-        <p className="text-sm text-gray-600 mt-1">Par continent</p>
+        <p className="text-sm text-gray-600 mt-1">{t('subtitle')}</p>
       </div>
 
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Région</TableHead>
-            <TableHead className="text-right">Maison</TableHead>
-            <TableHead className="text-right">Travail</TableHead>
-            <TableHead className="text-right">Transit</TableHead>
-            <TableHead className="text-right">Chômage</TableHead>
+            <TableHead>{t('columns.region')}</TableHead>
+            <TableHead className="text-right">{t('columns.home')}</TableHead>
+            <TableHead className="text-right">{t('columns.work')}</TableHead>
+            <TableHead className="text-right">{t('columns.transit')}</TableHead>
+            <TableHead className="text-right">{t('columns.unemployed')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -44,7 +49,7 @@ export function SnapshotStatsTable({ stats }: SnapshotStatsTableProps) {
                 <span className="flex items-center gap-2">
                   <span className="text-lg">{stat.region.emoji}</span>
                   <span className="font-medium text-gray-900">
-                    {stat.region.name}
+                    {tRegions(stat.region.id)}
                   </span>
                 </span>
               </TableCell>

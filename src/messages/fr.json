@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "title": "WeirdStats - Statistiques Mondiales en Temps Réel",
+    "description": "Dashboard en temps réel des statistiques mondiales - naissances, décès, événements sociaux et plus encore",
+    "keywords": ["statistiques", "monde", "temps réel", "population", "données mondiales"]
+  },
+  "layout": {
+    "title": "🌍 Statistiques Mondiales en Temps Réel",
+    "subtitle": "Simulation des événements mondiaux en direct"
+  },
+  "loading": {
+    "stats": "Chargement des statistiques..."
+  },
+  "languageSwitcher": {
+    "label": "Langue",
+    "languages": {
+      "fr": "Français",
+      "en": "Anglais",
+      "es": "Espagnol"
+    }
+  },
+  "cumulativeTable": {
+    "title": "📊 Événements Cumulés",
+    "columns": {
+      "indicator": "Indicateur",
+      "year": "2026",
+      "today": "Aujourd'hui",
+      "now": "Maintenant"
+    },
+    "labels": {
+      "deathsTotal": "⚠️ Total des morts",
+      "deathsMurder": "💀 🔫 Meurtres",
+      "deathsSuicide": "💀 💊 Suicides",
+      "deathsTobacco": "💀 🚬 Tabac",
+      "deathsHunger": "💀 🌾 Faim",
+      "deathsRoad": "💀 🚗 Accidents routiers",
+      "deathsOther": "💀 ⚰️ Autres causes",
+      "births": "👶 Naissances",
+      "netGrowth": "📈 Croissance nette",
+      "injuriesBrokenLeg": "🦴 Jambes cassées",
+      "injuriesBrokenArm": "💪 Bras cassés",
+      "socialMarriages": "💑 Mariages",
+      "socialDivorces": "💔 Divorces",
+      "socialAbandonments": "📦 Abandons",
+      "socialAdoptions": "🏠 Adoptions",
+      "physiologicalPoop": "💩 Cacas (litres)",
+      "physiologicalPee": "💧 Pipis (litres)",
+      "physiologicalSneezes": "🤧 Éternuements",
+      "physiologicalWaterConsumed": "🚰 Eau consommée (litres)",
+      "poolsPoop": "🏊 Piscine Olympique de caca",
+      "poolsPee": "🏊 Piscine Olympique de pipi"
+    }
+  },
+  "snapshotTable": {
+    "title": "Distribution en Temps Réel",
+    "subtitle": "Par continent",
+    "columns": {
+      "region": "Région",
+      "home": "Maison",
+      "work": "Travail",
+      "transit": "Transit",
+      "unemployed": "Chômage"
+    }
+  },
+  "sessionTimer": {
+    "label": "Temps de session"
+  },
+  "populationCounter": {
+    "label": "Population Mondiale"
+  },
+  "regions": {
+    "asia": "Asie",
+    "africa": "Afrique",
+    "northAmerica": "USA/Can",
+    "europe": "Europe",
+    "latinAmerica": "Am. Lat.",
+    "oceania": "Océanie"
+  }
+}
