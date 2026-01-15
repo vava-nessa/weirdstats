@@ -24,8 +24,17 @@
       "en": "Anglais"
     }
   },
+  "themeSwitcher": {
+    "label": "Thème",
+    "themes": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Auto"
+    }
+  },
   "cumulativeTable": {
     "title": "📊 Événements Cumulés",
+    "weirdTitle": "🤪 Stats Bizarres",
     "columns": {
       "indicator": "Indicateur",
       "year": "2026",

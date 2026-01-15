@@ -24,8 +24,17 @@
       "en": "English"
     }
   },
+  "themeSwitcher": {
+    "label": "Theme",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "Auto"
+    }
+  },
   "cumulativeTable": {
     "title": "📊 Cumulative Events",
+    "weirdTitle": "🤪 Weird Stats",
     "columns": {
       "indicator": "Indicator",
       "year": "2026",

@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { ExternalLink } from 'lucide-react'
@@ -14,6 +15,7 @@ interface StatDetailPanelProps {
 export function StatDetailPanel({ metadata, bgColor, textColor }: StatDetailPanelProps) {
   const t = useTranslations('statDetails')
   const { primary, primaryUnit, secondary, interval } = formatRateInterval(metadata.ratePerSecond)
+  const [showTooltip, setShowTooltip] = useState(false)
 
   return (
     <motion.tr
@@ -28,68 +30,74 @@ export function StatDetailPanel({ metadata, bgColor, textColor }: StatDetailPane
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.15, delay: 0.05 }}
-          className="px-4 py-3 pl-8"
+          className="px-4 py-3 pl-8 relative"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-            {/* Rate Information */}
-            <div className="flex items-start gap-2">
-              <span className="text-base">📊</span>
-              <div>
-                <span className={`font-medium ${textColor}`}>{t('rate')}:</span>{' '}
-                <span className="font-mono text-gray-700">
-                  {primary} {metadata.unit}/{t(primaryUnit)}
-                </span>
-                {secondary && (
-                  <span className="text-gray-500 ml-1">
-                    ({secondary}/{t('second')})
-                  </span>
-                )}
-                {interval && (
-                  <span className="text-gray-500 ml-1">
-                    — {t('every')} {interval}s
-                  </span>
-                )}
-              </div>
-            </div>
+          {/* Explanation text at the top (no label) */}
+          <div className="text-sm text-gray-600 mb-4">
+            {metadata.explanation}
+          </div>
 
-            {/* Formula */}
-            <div className="flex items-start gap-2">
-              <span className="text-base">📐</span>
-              <div>
-                <span className={`font-medium ${textColor}`}>{t('formula')}:</span>{' '}
-                <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs font-mono text-gray-700">
-                  {secondary || primary} × {t('elapsedSeconds')}
-                </code>
-              </div>
-            </div>
+          {/* Large empty space for future animations */}
+          <div className="min-h-[80px] mb-3">
+            {/* Space reserved for future animations */}
+          </div>
 
-            {/* Source */}
-            <div className="flex items-start gap-2">
-              <span className="text-base">📖</span>
-              <div>
-                <span className={`font-medium ${textColor}`}>{t('source')}:</span>{' '}
+          {/* Bottom-right info box */}
+          <div className="flex justify-end">
+            <div className="flex flex-col gap-1.5 text-xs">
+              {/* Source - compact */}
+              <div className="text-right">
                 {metadata.sourceUrl ? (
                   <a
                     href={metadata.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center gap-1"
+                    className="text-gray-500 hover:text-blue-600 hover:underline inline-flex items-center gap-1 text-[10px]"
                   >
+                    <ExternalLink className="w-2.5 h-2.5" />
                     {metadata.source}
-                    <ExternalLink className="w-3 h-3" />
                   </a>
                 ) : (
-                  <span className="text-gray-600">{metadata.source}</span>
+                  <span className="text-gray-500 text-[10px]">{metadata.source}</span>
                 )}
               </div>
-            </div>
 
-            {/* Explanation - spans full width */}
-            <div className="flex items-start gap-2 md:col-span-2">
-              <span className="text-base">ℹ️</span>
-              <div>
-                <span className={`font-medium ${textColor}`}>{t('about')}:</span>{' '}
-                <span className="text-gray-600">{metadata.explanation}</span>
+              {/* Rate box - compact with tooltip */}
+              <div className="relative">
+                <div
+                  className={`${bgColor} border-2 border-gray-300/60 rounded px-2 py-1.5 text-center shadow-sm cursor-help`}
+                  onMouseEnter={() => setShowTooltip(true)}
+                  onMouseLeave={() => setShowTooltip(false)}
+                >
+                  <div className="font-mono font-bold text-gray-800 text-xs">
+                    {primary} {metadata.unit}/{t(primaryUnit)}
+                  </div>
+                  {secondary && (
+                    <div className="text-gray-500 text-[10px] mt-0.5">
+                      ({secondary}/{t('second')})
+                    </div>
+                  )}
+                  {interval && (
+                    <div className="text-gray-500 text-[10px] mt-0.5">
+                      1 / {interval}s
+                    </div>
+                  )}
+                </div>
+
+                {/* Tooltip with formula */}
+                {showTooltip && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute bottom-full right-0 mb-2 bg-gray-900 text-white px-2 py-1.5 rounded shadow-lg text-xs whitespace-nowrap z-10"
+                  >
+                    <div className="font-semibold mb-0.5">{t('formula')}:</div>
+                    <code className="font-mono text-[10px]">
+                      {secondary || primary} × {t('elapsedSeconds')}
+                    </code>
+                    <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+                  </motion.div>
+                )}
               </div>
             </div>
           </div>
