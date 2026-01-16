@@ -42,24 +42,25 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
   return (
     <div className="space-y-8">
       {/* First Table: Main Stats */}
-      <Card className="overflow-hidden">
-        <div className="px-4 py-3 bg-gray-100 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
+      <Card className="overflow-hidden border border-border bg-card dark:bg-card">
+        <div className="px-4 py-3 bg-gray-100 dark:bg-secondary/50 border-b border-border">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-foreground">
             {t('title')}
           </h2>
         </div>
 
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead className="w-[40%]">{t('columns.indicator')}</TableHead>
-              <TableHead className="text-right w-[20%] text-gray-500">
+            <TableRow className="border-border hover:bg-transparent">
+              <TableHead className="w-[40%] text-muted-foreground">{t('columns.indicator')}</TableHead>
+              <TableHead className="text-right w-[20%] text-muted-foreground/80">
                 {t('columns.year')}
               </TableHead>
-              <TableHead className="text-right w-[20%] text-gray-800">
+              <TableHead className="text-right w-[20%] text-muted-foreground/80">{capitalizedMonth}</TableHead>
+              <TableHead className="text-right w-[20%] text-foreground/80">
                 {t('columns.today')}
               </TableHead>
-              <TableHead className="text-right w-[20%] text-blue-500">
+              <TableHead className="text-right w-[20%] text-blue-500 dark:text-blue-400">
                 {t('columns.now')}{' '}
                 <span className="font-mono opacity-70 ml-1">
                   {formatTime(elapsedSeconds)}
@@ -177,24 +178,25 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
       </Card>
 
       {/* Second Table: Love & Family */}
-      <Card className="overflow-hidden">
-        <div className="px-4 py-3 bg-gray-100 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
+      <Card className="overflow-hidden border border-border bg-card dark:bg-card">
+        <div className="px-4 py-3 bg-gray-100 dark:bg-secondary/50 border-b border-border">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-foreground">
             {t('loveFamilyTitle')}
           </h2>
         </div>
 
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead className="w-[40%]">{t('columns.indicator')}</TableHead>
-              <TableHead className="text-right w-[20%] text-gray-500">
+            <TableRow className="border-border hover:bg-transparent">
+              <TableHead className="w-[40%] text-muted-foreground">{t('columns.indicator')}</TableHead>
+              <TableHead className="text-right w-[20%] text-muted-foreground/80">
                 {t('columns.year')}
               </TableHead>
-              <TableHead className="text-right w-[20%] text-gray-800">
+              <TableHead className="text-right w-[20%] text-muted-foreground/80">{capitalizedMonth}</TableHead>
+              <TableHead className="text-right w-[20%] text-foreground/80">
                 {t('columns.today')}
               </TableHead>
-              <TableHead className="text-right w-[20%] text-blue-500">
+              <TableHead className="text-right w-[20%] text-blue-500 dark:text-blue-400">
                 {t('columns.now')}{' '}
                 <span className="font-mono opacity-70 ml-1">
                   {formatTime(elapsedSeconds)}
@@ -309,24 +311,25 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
       </Card>
 
       {/* Third Table: Weird Stats */}
-      <Card className="overflow-hidden">
-        <div className="px-4 py-3 bg-gray-100 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
+      <Card className="overflow-hidden border border-border bg-card dark:bg-card">
+        <div className="px-4 py-3 bg-gray-100 dark:bg-secondary/50 border-b border-border">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-foreground">
             {t('weirdTitle')}
           </h2>
         </div>
 
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead className="w-[40%]">{t('columns.indicator')}</TableHead>
-              <TableHead className="text-right w-[20%] text-gray-500">
+            <TableRow className="border-border hover:bg-transparent">
+              <TableHead className="w-[40%] text-muted-foreground">{t('columns.indicator')}</TableHead>
+              <TableHead className="text-right w-[20%] text-muted-foreground/80">
                 {t('columns.year')}
               </TableHead>
-              <TableHead className="text-right w-[20%] text-gray-800">
+              <TableHead className="text-right w-[20%] text-muted-foreground/80">{capitalizedMonth}</TableHead>
+              <TableHead className="text-right w-[20%] text-foreground/80">
                 {t('columns.today')}
               </TableHead>
-              <TableHead className="text-right w-[20%] text-blue-500">
+              <TableHead className="text-right w-[20%] text-blue-500 dark:text-blue-400">
                 {t('columns.now')}{' '}
                 <span className="font-mono opacity-70 ml-1">
                   {formatTime(elapsedSeconds)}

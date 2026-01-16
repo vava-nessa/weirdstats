@@ -1,0 +1,112 @@
+{
+    "metadata": {
+        "title": "WeirdStats - إحصائيات العالم في الوقت الفعلي",
+        "description": "لوحة متابعة إحصائيات العالم في الوقت الفعلي - المواليد، الوفيات، الأحداث الاجتماعية والمزيد",
+        "keywords": [
+            "إحصائيات",
+            "عالم",
+            "وقت فعلي",
+            "سكان",
+            "بيانات عالمية"
+        ]
+    },
+    "layout": {
+        "title": "🌍 إحصائيات العالم المباشرة",
+        "subtitle": "محاكاة حية للأحداث العالمية"
+    },
+    "loading": {
+        "stats": "جاري تحميل الإحصائيات..."
+    },
+    "languageSwitcher": {
+        "label": "اللغة",
+        "languages": {
+            "fr": "الفرنسية (French)",
+            "en": "الإنجليزية (English)",
+            "zh": "الصينية (Chinese)",
+            "ar": "العربية (Arabic)"
+        }
+    },
+    "themeSwitcher": {
+        "label": "المظهر",
+        "themes": {
+            "light": "فاتح",
+            "dark": "داكن",
+            "system": "تلقائي"
+        }
+    },
+    "cumulativeTable": {
+        "title": "📊 الأحداث التراكمية",
+        "weirdTitle": "🤪 إحصائيات غريبة",
+        "loveFamilyTitle": "💕 الحب والعائلة",
+        "columns": {
+            "indicator": "المؤشر",
+            "year": "2026",
+            "today": "اليوم",
+            "now": "الآن"
+        },
+        "labels": {
+            "deathsTotal": "⚠️ إجمالي الوفيات",
+            "deathsMurder": "💀 🔫 جرائم القتل",
+            "deathsSuicide": "💀 💊 حالات الانتحار",
+            "deathsTobacco": "💀 🚬 الوفيات بسبب التبغ",
+            "deathsHunger": "💀 🌾 الوفيات بسبب الجوع",
+            "deathsRoad": "💀 🚗 حوادث الطرق",
+            "deathsOther": "💀 ⚰️ أسباب أخرى",
+            "births": "👶 المواليد",
+            "netGrowth": "📈 النمو الصافي",
+            "injuriesBrokenLeg": "🦴 كسور الساق",
+            "injuriesBrokenArm": "💪 كسور الذراع",
+            "socialMarriages": "💑 الزواج",
+            "socialDivorces": "💔 الطلاق",
+            "socialCoupleFormations": "❤️ علاقات جديدة",
+            "socialBreakups": "💢 انفصال",
+            "socialInfidelities": "😈 الخيانة الزوجية",
+            "socialSexualIntercourse": "🔥 علاقات حميمة",
+            "socialMaleOrgasms": "🍆 نشوة (ذكور)",
+            "socialFemaleOrgasms": "🌸 نشوة (إناث)",
+            "socialAbandonments": "📦 الهجر",
+            "socialAdoptions": "🏠 التبني",
+            "physiologicalPoop": "💩 فضلات (لتر)",
+            "physiologicalPee": "💧 بول (لتر)",
+            "physiologicalSneezes": "🤧 العطس",
+            "physiologicalWaterConsumed": "🚰 استهلاك الماء (لتر)",
+            "poolsPoop": "🏊 مسبح أولمبي من الفضلات",
+            "poolsPee": "🏊 مسبح أولمبي من البول"
+        }
+    },
+    "snapshotTable": {
+        "title": "التوزيع في الوقت الفعلي",
+        "subtitle": "حسب القارة",
+        "columns": {
+            "region": "المنطقة",
+            "home": "المنزل",
+            "work": "العمل",
+            "transit": "المواصلات",
+            "unemployed": "عاطل"
+        }
+    },
+    "sessionTimer": {
+        "label": "وقت الجلسة"
+    },
+    "populationCounter": {
+        "label": "سكان العالم"
+    },
+    "regions": {
+        "asia": "آسيا",
+        "africa": "أفريقيا",
+        "northAmerica": "أمريكا الشمالية",
+        "europe": "أوروبا",
+        "latinAmerica": "أمريكا اللاتينية",
+        "oceania": "أوقيانوسيا"
+    },
+    "statDetails": {
+        "rate": "المعدل",
+        "second": "ثانية",
+        "minute": "دقيقة",
+        "every": "1 كل",
+        "formula": "المعادلة",
+        "elapsedSeconds": "ثواني المنقضية",
+        "source": "المصدر",
+        "about": "حول"
+    }
+}

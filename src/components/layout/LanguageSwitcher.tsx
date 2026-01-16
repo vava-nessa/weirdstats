@@ -34,18 +34,27 @@ export function LanguageSwitcher() {
   const pathname = usePathname()
   const activeLocale = useLocale()
 
+  const flags: Record<Locale, string> = {
+    fr: '🇫🇷',
+    en: '🇬🇧',
+    zh: '🇨🇳',
+    ar: '🇸🇦',
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" aria-label={t('label')}>
+        <Button variant="outline" size="sm" aria-label={t('label')} className="text-foreground dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80">
+          <span className="mr-2">{flags[activeLocale as Locale]}</span>
           {t(`languages.${activeLocale}`)}
-          <ChevronDown className="h-4 w-4 text-gray-500" />
+          <ChevronDown className="h-4 w-4 ml-2 opacity-50" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {locales.map((locale) => (
           <DropdownMenuItem key={locale} asChild>
-            <Link href={buildLocalePathname(pathname, locale)}>
+            <Link href={buildLocalePathname(pathname, locale)} className="cursor-pointer w-full flex items-center">
+              <span className="mr-2">{flags[locale]}</span>
               {t(`languages.${locale}`)}
             </Link>
           </DropdownMenuItem>

@@ -39,7 +39,7 @@ export function ThemeSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" aria-label={t('label')}>
+        <Button variant="outline" size="sm" aria-label={t('label')} className="text-foreground dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80">
           {themeIcons[theme as keyof typeof themeIcons] || themeIcons.system}
           <span className="ml-2">{t(`themes.${theme}`)}</span>
         </Button>

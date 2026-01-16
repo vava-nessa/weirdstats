@@ -1,0 +1,112 @@
+{
+    "metadata": {
+        "title": "WeirdStats - 实时世界统计",
+        "description": "世界统计实时仪表板 - 出生、死亡、社会事件及更多",
+        "keywords": [
+            "统计",
+            "世界",
+            "实时",
+            "人口",
+            "全球数据"
+        ]
+    },
+    "layout": {
+        "title": "🌍 实时世界统计",
+        "subtitle": "全球事件实时模拟"
+    },
+    "loading": {
+        "stats": "正在加载统计数据..."
+    },
+    "languageSwitcher": {
+        "label": "语言",
+        "languages": {
+            "fr": "法语 (French)",
+            "en": "英语 (English)",
+            "zh": "中文 (Chinese)",
+            "ar": "阿拉伯语 (Arabic)"
+        }
+    },
+    "themeSwitcher": {
+        "label": "主题",
+        "themes": {
+            "light": "亮色",
+            "dark": "暗色",
+            "system": "自动"
+        }
+    },
+    "cumulativeTable": {
+        "title": "📊 累计事件",
+        "weirdTitle": "🤪 趣味统计",
+        "loveFamilyTitle": "💕 爱情与家庭",
+        "columns": {
+            "indicator": "指标",
+            "year": "2026",
+            "today": "今天",
+            "now": "现在"
+        },
+        "labels": {
+            "deathsTotal": "⚠️ 死亡总数",
+            "deathsMurder": "💀 🔫 谋杀",
+            "deathsSuicide": "💀 💊 自杀",
+            "deathsTobacco": "💀 🚬 烟草致死",
+            "deathsHunger": "💀 🌾 饥饿致死",
+            "deathsRoad": "💀 🚗 交通事故",
+            "deathsOther": "💀 ⚰️ 其他原因",
+            "births": "👶 出生",
+            "netGrowth": "📈 净增长",
+            "injuriesBrokenLeg": "🦴 腿部骨折",
+            "injuriesBrokenArm": "💪 手臂骨折",
+            "socialMarriages": "💑 结婚",
+            "socialDivorces": "💔 离婚",
+            "socialCoupleFormations": "❤️ 新恋情",
+            "socialBreakups": "💢 分手",
+            "socialInfidelities": "😈 出轨",
+            "socialSexualIntercourse": "🔥 性行为",
+            "socialMaleOrgasms": "🍆 男性高潮",
+            "socialFemaleOrgasms": "🌸 女性高潮",
+            "socialAbandonments": "📦 遗弃",
+            "socialAdoptions": "🏠 领养",
+            "physiologicalPoop": "💩 粪便 (升)",
+            "physiologicalPee": "💧 尿液 (升)",
+            "physiologicalSneezes": "🤧 打喷嚏",
+            "physiologicalWaterConsumed": "🚰 饮水量 (升)",
+            "poolsPoop": "🏊 粪便奥运泳池",
+            "poolsPee": "🏊 尿液奥运泳池"
+        }
+    },
+    "snapshotTable": {
+        "title": "实时分布",
+        "subtitle": "按大陆",
+        "columns": {
+            "region": "区域",
+            "home": "在家",
+            "work": "工作",
+            "transit": "通勤",
+            "unemployed": "失业"
+        }
+    },
+    "sessionTimer": {
+        "label": "会话时间"
+    },
+    "populationCounter": {
+        "label": "世界人口"
+    },
+    "regions": {
+        "asia": "亚洲",
+        "africa": "非洲",
+        "northAmerica": "美国/加拿大",
+        "europe": "欧洲",
+        "latinAmerica": "拉丁美洲",
+        "oceania": "大洋洲"
+    },
+    "statDetails": {
+        "rate": "速率",
+        "second": "秒",
+        "minute": "分钟",
+        "every": "每 1 次",
+        "formula": "公式",
+        "elapsedSeconds": "经过秒数",
+        "source": "来源",
+        "about": "关于"
+    }
+}

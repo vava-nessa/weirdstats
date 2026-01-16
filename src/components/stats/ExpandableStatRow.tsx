@@ -41,18 +41,18 @@ export function ExpandableStatRow({
   return (
     <>
       <TableRow
-        className={`${bgColor} ${hasMetadata ? 'cursor-pointer hover:brightness-95 transition-all' : ''}`}
+        className={`transition-all duration-200 border-b border-border/50 ${hasMetadata ? 'cursor-pointer hover:brightness-95 dark:hover:brightness-110' : ''} ${bgColor} dark:bg-opacity-10 dark:text-foreground`}
         onClick={() => hasMetadata && onToggle(statKey)}
       >
         <TableCell className={indent ? 'pl-8' : ''}>
           <div className="flex items-center gap-2">
             <span
-              className={`font-medium ${textColor} ${isTotal ? 'uppercase tracking-wider font-bold' : ''}`}
+              className={`font-medium ${textColor} dark:text-foreground ${isTotal ? 'uppercase tracking-wider font-bold' : ''}`}
             >
               {label}
             </span>
             {hasMetadata && (
-              <span className={`${textColor} opacity-60`}>
+              <span className={`${textColor} dark:text-foreground opacity-60`}>
                 {isExpanded ? (
                   <ChevronUp className="w-4 h-4" />
                 ) : (
@@ -67,7 +67,7 @@ export function ExpandableStatRow({
         <TableCell className="text-right">
           <AnimatedNumber
             to={values.year}
-            className={`font-mono ${textColor} ${isTotal ? 'font-bold' : ''}`}
+            className={`font-mono ${textColor} dark:text-foreground/80 ${isTotal ? 'font-bold' : ''}`}
             {...ANIMATION_PRESETS.snappy}
             fractionDigits={fractionDigits}
           />
@@ -77,7 +77,7 @@ export function ExpandableStatRow({
         <TableCell className="text-right">
           <AnimatedNumber
             to={values.today}
-            className={`font-mono ${textColor} opacity-80`}
+            className={`font-mono ${textColor} dark:text-foreground/70 opacity-80`}
             {...ANIMATION_PRESETS.snappy}
             fractionDigits={fractionDigits}
           />
@@ -87,7 +87,7 @@ export function ExpandableStatRow({
         <TableCell className="text-right">
           <AnimatedNumber
             to={values.session}
-            className={`font-mono font-bold text-blue-600`}
+            className={`font-mono font-bold text-blue-600 dark:text-blue-400`}
             {...ANIMATION_PRESETS.snappy}
             fractionDigits={fractionDigits}
           />

@@ -21,7 +21,9 @@
     "label": "Language",
     "languages": {
       "fr": "French",
-      "en": "English"
+      "en": "English",
+      "zh": "Chinese",
+      "ar": "Arabic"
     }
   },
   "themeSwitcher": {
