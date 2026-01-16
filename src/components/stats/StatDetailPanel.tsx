@@ -51,7 +51,7 @@ export function StatDetailPanel({ metadata, bgColor, textColor, statKey, current
       exit={{ opacity: 0, height: 0 }}
       transition={{ duration: 0.2, ease: 'easeInOut' }}
     >
-      <td colSpan={5} className={`${bgColor} border-t border-gray-200/50`}>
+      <td colSpan={4} className={`${bgColor} border-t border-gray-200/50`}>
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}

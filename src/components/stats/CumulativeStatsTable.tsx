@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 
 import { MultiPeriodStats } from '@/types/stats'
 import { Card } from '@/components/ui/Card'
@@ -23,9 +23,6 @@ interface CumulativeStatsTableProps {
 
 export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsTableProps) {
   const t = useTranslations('cumulativeTable')
-  const locale = useLocale()
-  const currentMonth = new Date().toLocaleString(locale, { month: 'long' })
-  const capitalizedMonth = currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1)
 
   // Track which rows are expanded
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
@@ -55,15 +52,14 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[34%]">{t('columns.indicator')}</TableHead>
-              <TableHead className="text-right w-[15%] text-gray-500">
+              <TableHead className="w-[40%]">{t('columns.indicator')}</TableHead>
+              <TableHead className="text-right w-[20%] text-gray-500">
                 {t('columns.year')}
               </TableHead>
-              <TableHead className="text-right w-[15%] text-gray-500">{capitalizedMonth}</TableHead>
-              <TableHead className="text-right w-[15%] text-gray-800">
+              <TableHead className="text-right w-[20%] text-gray-800">
                 {t('columns.today')}
               </TableHead>
-              <TableHead className="text-right w-[21%] text-blue-500">
+              <TableHead className="text-right w-[20%] text-blue-500">
                 {t('columns.now')}{' '}
                 <span className="font-mono opacity-70 ml-1">
                   {formatTime(elapsedSeconds)}
@@ -191,15 +187,14 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[34%]">{t('columns.indicator')}</TableHead>
-              <TableHead className="text-right w-[15%] text-gray-500">
+              <TableHead className="w-[40%]">{t('columns.indicator')}</TableHead>
+              <TableHead className="text-right w-[20%] text-gray-500">
                 {t('columns.year')}
               </TableHead>
-              <TableHead className="text-right w-[15%] text-gray-500">{capitalizedMonth}</TableHead>
-              <TableHead className="text-right w-[15%] text-gray-800">
+              <TableHead className="text-right w-[20%] text-gray-800">
                 {t('columns.today')}
               </TableHead>
-              <TableHead className="text-right w-[21%] text-blue-500">
+              <TableHead className="text-right w-[20%] text-blue-500">
                 {t('columns.now')}{' '}
                 <span className="font-mono opacity-70 ml-1">
                   {formatTime(elapsedSeconds)}
@@ -250,6 +245,46 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
               onToggle={toggleRow}
             />
             <ExpandableStatRow
+              statKey="social.infidelities"
+              label={t('labels.socialInfidelities')}
+              values={stats.social.infidelities}
+              metadata={STAT_METADATA['social.infidelities']}
+              bgColor="bg-red-50"
+              textColor="text-red-700"
+              isExpanded={expandedRows.has('social.infidelities')}
+              onToggle={toggleRow}
+            />
+            <ExpandableStatRow
+              statKey="social.sexualIntercourse"
+              label={t('labels.socialSexualIntercourse')}
+              values={stats.social.sexualIntercourse}
+              metadata={STAT_METADATA['social.sexualIntercourse']}
+              bgColor="bg-rose-50"
+              textColor="text-rose-700"
+              isExpanded={expandedRows.has('social.sexualIntercourse')}
+              onToggle={toggleRow}
+            />
+            <ExpandableStatRow
+              statKey="social.maleOrgasms"
+              label={t('labels.socialMaleOrgasms')}
+              values={stats.social.maleOrgasms}
+              metadata={STAT_METADATA['social.maleOrgasms']}
+              bgColor="bg-indigo-50"
+              textColor="text-indigo-700"
+              isExpanded={expandedRows.has('social.maleOrgasms')}
+              onToggle={toggleRow}
+            />
+            <ExpandableStatRow
+              statKey="social.femaleOrgasms"
+              label={t('labels.socialFemaleOrgasms')}
+              values={stats.social.femaleOrgasms}
+              metadata={STAT_METADATA['social.femaleOrgasms']}
+              bgColor="bg-pink-50"
+              textColor="text-pink-700"
+              isExpanded={expandedRows.has('social.femaleOrgasms')}
+              onToggle={toggleRow}
+            />
+            <ExpandableStatRow
               statKey="social.abandonments"
               label={t('labels.socialAbandonments')}
               values={stats.social.abandonments}
@@ -284,15 +319,14 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[34%]">{t('columns.indicator')}</TableHead>
-              <TableHead className="text-right w-[15%] text-gray-500">
+              <TableHead className="w-[40%]">{t('columns.indicator')}</TableHead>
+              <TableHead className="text-right w-[20%] text-gray-500">
                 {t('columns.year')}
               </TableHead>
-              <TableHead className="text-right w-[15%] text-gray-500">{capitalizedMonth}</TableHead>
-              <TableHead className="text-right w-[15%] text-gray-800">
+              <TableHead className="text-right w-[20%] text-gray-800">
                 {t('columns.today')}
               </TableHead>
-              <TableHead className="text-right w-[21%] text-blue-500">
+              <TableHead className="text-right w-[20%] text-blue-500">
                 {t('columns.now')}{' '}
                 <span className="font-mono opacity-70 ml-1">
                   {formatTime(elapsedSeconds)}

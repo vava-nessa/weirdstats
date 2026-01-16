@@ -27,6 +27,10 @@ export interface SocialStats {
   divorces: number
   coupleFormations: number
   breakups: number
+  infidelities: number
+  sexualIntercourse: number
+  maleOrgasms: number
+  femaleOrgasms: number
   abandonments: number
   adoptions: number
 }
@@ -109,6 +113,10 @@ export interface MultiPeriodStats {
     divorces: MultiPeriodValue
     coupleFormations: MultiPeriodValue
     breakups: MultiPeriodValue
+    infidelities: MultiPeriodValue
+    sexualIntercourse: MultiPeriodValue
+    maleOrgasms: MultiPeriodValue
+    femaleOrgasms: MultiPeriodValue
     abandonments: MultiPeriodValue
     adoptions: MultiPeriodValue
   }

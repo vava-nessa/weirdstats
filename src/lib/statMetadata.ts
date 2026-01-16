@@ -213,6 +213,42 @@ export const STAT_METADATA: Record<string, StatMetadata> = {
     explanation:
       'Romantic relationship breakups (unmarried couples) worldwide. More common than divorces as they include all types of partnerships.',
   },
+  'social.infidelities': {
+    id: 'social.infidelities',
+    ratePerSecond: RATES.infidelity,
+    unit: 'infidelities',
+    source: 'World Population Review',
+    sourceUrl: 'https://worldpopulationreview.com/country-rankings/infidelity-rates-by-country',
+    explanation:
+      'People committing infidelity worldwide. Studies show ~40% of unmarried relationships and 25% of marriages experience infidelity.',
+  },
+  'social.sexualIntercourse': {
+    id: 'social.sexualIntercourse',
+    ratePerSecond: RATES.sexualIntercourse,
+    unit: 'acts',
+    source: 'Global Health Statistics',
+    sourceUrl: 'https://www.medindia.net/health_statistics/health_facts/sexual-intercourse-top-ten-facts.htm',
+    explanation:
+      'Sexual intercourse acts worldwide. Estimated at ~100 million per day globally based on population and sexual activity surveys.',
+  },
+  'social.maleOrgasms': {
+    id: 'social.maleOrgasms',
+    ratePerSecond: RATES.maleOrgasm,
+    unit: 'orgasms',
+    source: 'Canadian Journal of Human Sexuality',
+    sourceUrl: 'https://utppublishing.com/doi/abs/10.3138/cjhs-2024-0019',
+    explanation:
+      'Male orgasms worldwide (all sources). Studies show men average 0.63 orgasms per day including partnered sex and masturbation.',
+  },
+  'social.femaleOrgasms': {
+    id: 'social.femaleOrgasms',
+    ratePerSecond: RATES.femaleOrgasm,
+    unit: 'orgasms',
+    source: 'Canadian Journal of Human Sexuality',
+    sourceUrl: 'https://utppublishing.com/doi/abs/10.3138/cjhs-2024-0019',
+    explanation:
+      'Female orgasms worldwide (all sources). Studies show women average 0.36 orgasms per day, reflecting the documented orgasm gap.',
+  },
   'social.abandonments': {
     id: 'social.abandonments',
     ratePerSecond: RATES.abandoned,

@@ -98,6 +98,10 @@ export function calculateCumulativeStats(
     divorces: getMultiPeriodValue(RATES.divorce, periods),
     coupleFormations: getMultiPeriodValue(RATES.coupleFormation, periods),
     breakups: getMultiPeriodValue(RATES.breakup, periods),
+    infidelities: getMultiPeriodValue(RATES.infidelity, periods),
+    sexualIntercourse: getMultiPeriodValue(RATES.sexualIntercourse, periods),
+    maleOrgasms: getMultiPeriodValue(RATES.maleOrgasm, periods),
+    femaleOrgasms: getMultiPeriodValue(RATES.femaleOrgasm, periods),
     abandonments: getMultiPeriodValue(RATES.abandoned, periods),
     adoptions: getMultiPeriodValue(RATES.adopted, periods),
   }

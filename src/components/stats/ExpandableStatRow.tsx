@@ -73,16 +73,6 @@ export function ExpandableStatRow({
           />
         </TableCell>
 
-        {/* This Month */}
-        <TableCell className="text-right">
-          <AnimatedNumber
-            to={values.month}
-            className={`font-mono ${textColor} opacity-80`}
-            {...ANIMATION_PRESETS.snappy}
-            fractionDigits={fractionDigits}
-          />
-        </TableCell>
-
         {/* Today */}
         <TableCell className="text-right">
           <AnimatedNumber

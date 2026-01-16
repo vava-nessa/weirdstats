@@ -35,6 +35,10 @@ export const RATES = {
   divorce: 1 / 1.8,
   coupleFormation: 12,
   breakup: 4,
+  infidelity: 10,
+  sexualIntercourse: 1157, // 100M per day / 86400 seconds
+  maleOrgasm: 21875, // ~3B men × 0.63 orgasms/day / 86400
+  femaleOrgasm: 12500, // ~3B women × 0.36 orgasms/day / 86400
   abandoned: 1 / 15,
   adopted: 1 / 120,
   
