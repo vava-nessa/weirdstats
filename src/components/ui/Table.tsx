@@ -1,14 +1,21 @@
-import { ReactNode } from 'react'
+import { ReactNode, forwardRef, CSSProperties } from 'react'
 
 interface TableProps {
   children: ReactNode
   className?: string
+  tableClassName?: string
 }
 
-export function Table({ children, className = '' }: TableProps) {
+export function Table({
+  children,
+  className = '',
+  tableClassName = '',
+}: TableProps) {
   return (
     <div className={`overflow-x-auto ${className}`}>
-      <table className="w-full border-collapse">{children}</table>
+      <table className={`w-full border-collapse ${tableClassName}`}>
+        {children}
+      </table>
     </div>
   )
 }
@@ -23,25 +30,42 @@ export function TableHeader({ children }: TableHeaderProps) {
 
 interface TableBodyProps {
   children: ReactNode
+  className?: string
+  style?: CSSProperties
 }
 
-export function TableBody({ children }: TableBodyProps) {
-  return <tbody className="divide-y divide-gray-200">{children}</tbody>
+export function TableBody({ children, className = '', style }: TableBodyProps) {
+  return (
+    <tbody className={`divide-y divide-gray-200 ${className}`} style={style}>
+      {children}
+    </tbody>
+  )
 }
 
 interface TableRowProps {
   children: ReactNode
   className?: string
   onClick?: () => void
+  style?: CSSProperties
+  dataIndex?: number
 }
 
-export function TableRow({ children, className = '', onClick }: TableRowProps) {
-  return (
-    <tr className={className} onClick={onClick}>
-      {children}
-    </tr>
-  )
-}
+export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
+  ({ children, className = '', onClick, style, dataIndex }, ref) => {
+    return (
+      <tr
+        ref={ref}
+        className={className}
+        onClick={onClick}
+        style={style}
+        data-index={dataIndex}
+      >
+        {children}
+      </tr>
+    )
+  }
+)
+TableRow.displayName = 'TableRow'
 
 interface TableHeadProps {
   children: ReactNode
@@ -61,8 +85,23 @@ export function TableHead({ children, className = '' }: TableHeadProps) {
 interface TableCellProps {
   children: ReactNode
   className?: string
+  style?: CSSProperties
+  colSpan?: number
 }
 
-export function TableCell({ children, className = '' }: TableCellProps) {
-  return <td className={`px-4 py-3 text-sm ${className}`}>{children}</td>
+export function TableCell({
+  children,
+  className = '',
+  style,
+  colSpan,
+}: TableCellProps) {
+  return (
+    <td
+      className={`px-4 py-3 text-sm ${className}`}
+      style={style}
+      colSpan={colSpan}
+    >
+      {children}
+    </td>
+  )
 }

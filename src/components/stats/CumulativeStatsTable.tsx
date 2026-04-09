@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useCallback } from 'react'
-import { useTranslations } from 'next-intl'
+import { useState, useCallback, useMemo } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { MultiPeriodStats } from '@/types/stats'
 import { Card } from '@/components/ui/Card'
@@ -21,8 +21,30 @@ interface CumulativeStatsTableProps {
   elapsedSeconds: number
 }
 
-export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsTableProps) {
+export function CumulativeStatsTable({
+  stats,
+  elapsedSeconds,
+}: CumulativeStatsTableProps) {
   const t = useTranslations('cumulativeTable')
+  const locale = useLocale()
+
+  const capitalizedMonth = useMemo(() => {
+    const monthLabel = new Intl.DateTimeFormat(locale, {
+      month: 'long',
+    }).format(new Date())
+
+    if (monthLabel.length === 0) {
+      return monthLabel
+    }
+
+    const firstChar = monthLabel.charAt(0)
+    const capitalizedFirstChar = firstChar.toLocaleUpperCase(locale)
+    if (capitalizedFirstChar === firstChar) {
+      return monthLabel
+    }
+
+    return `${capitalizedFirstChar}${monthLabel.slice(1)}`
+  }, [locale])
 
   // Track which rows are expanded
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
@@ -52,11 +74,15 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
         <Table>
           <TableHeader>
             <TableRow className="border-border hover:bg-transparent">
-              <TableHead className="w-[40%] text-muted-foreground">{t('columns.indicator')}</TableHead>
+              <TableHead className="w-[40%] text-muted-foreground">
+                {t('columns.indicator')}
+              </TableHead>
               <TableHead className="text-right w-[20%] text-muted-foreground/80">
                 {t('columns.year')}
               </TableHead>
-              <TableHead className="text-right w-[20%] text-muted-foreground/80">{capitalizedMonth}</TableHead>
+              <TableHead className="text-right w-[20%] text-muted-foreground/80">
+                {capitalizedMonth}
+              </TableHead>
               <TableHead className="text-right w-[20%] text-foreground/80">
                 {t('columns.today')}
               </TableHead>
@@ -188,11 +214,15 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
         <Table>
           <TableHeader>
             <TableRow className="border-border hover:bg-transparent">
-              <TableHead className="w-[40%] text-muted-foreground">{t('columns.indicator')}</TableHead>
+              <TableHead className="w-[40%] text-muted-foreground">
+                {t('columns.indicator')}
+              </TableHead>
               <TableHead className="text-right w-[20%] text-muted-foreground/80">
                 {t('columns.year')}
               </TableHead>
-              <TableHead className="text-right w-[20%] text-muted-foreground/80">{capitalizedMonth}</TableHead>
+              <TableHead className="text-right w-[20%] text-muted-foreground/80">
+                {capitalizedMonth}
+              </TableHead>
               <TableHead className="text-right w-[20%] text-foreground/80">
                 {t('columns.today')}
               </TableHead>
@@ -321,11 +351,15 @@ export function CumulativeStatsTable({ stats, elapsedSeconds }: CumulativeStatsT
         <Table>
           <TableHeader>
             <TableRow className="border-border hover:bg-transparent">
-              <TableHead className="w-[40%] text-muted-foreground">{t('columns.indicator')}</TableHead>
+              <TableHead className="w-[40%] text-muted-foreground">
+                {t('columns.indicator')}
+              </TableHead>
               <TableHead className="text-right w-[20%] text-muted-foreground/80">
                 {t('columns.year')}
               </TableHead>
-              <TableHead className="text-right w-[20%] text-muted-foreground/80">{capitalizedMonth}</TableHead>
+              <TableHead className="text-right w-[20%] text-muted-foreground/80">
+                {capitalizedMonth}
+              </TableHead>
               <TableHead className="text-right w-[20%] text-foreground/80">
                 {t('columns.today')}
               </TableHead>
